@@ -30,11 +30,10 @@ Route::get('/update', function(){
 */
 
 Route::get('/welcome', 'NotesController@index');
+
 Route::get('edit', function(){
   return view('edit');
 });
-
-
 
 Route::get('/', function () {
     return view('auth/login');
@@ -45,12 +44,21 @@ Route::get('/logout', 'NotesController@logout');
 Route::get('home',function(){
   if(Auth::guest()){
     return Redirect::to('auth/login');
-  }else {
+  }
+  else {
     return view('notes');
 }
 });
 
 Route::resource('notes', 'NotesController');
+
+// Password reset link request routes...
+Route::get('password/email', 'Auth\PasswordController@getEmail');
+Route::post('password/email', 'Auth\PasswordController@postEmail');
+
+// Password reset routes...
+Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
+Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
