@@ -1,3 +1,4 @@
+<!-- resources/views/notes.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +10,14 @@
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<link href="notes.css" rel="stylesheet" type="text/css" />
+
+	<!-- Laravel Font -->
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+
+	<!-- Notes Style -->
+	<link href="css/notes.min.css" rel="stylesheet" type="text/css" />
+
+
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -31,12 +39,12 @@
 			<h2 id="header">{{ auth()->user()-> email }} - <span><a href="{{ URL::to('auth/logout') }}">Log out</a></span></h2>
 
 				<div id="notes-column" class="col-md-3">
-					<h2>notes</h2>
-					<textarea cols="25" rows="25" id="notes" name="notes" /></textarea>
+					<h2>Notes</h2>
+					<textarea id="notes" name="notes" /></textarea>
 				</div>
 
 				<div id="websites-column" class="col-md-3">
-					<h2>websites</h2>
+					<h2>Websites</h2>
 					<h3>click to open</h3>
 					<input type="text" name="websites[]" />
 					<br>
@@ -49,7 +57,7 @@
 				</div>
 
 			<div id="images-column" class="col-md-3">
-				<h2>images</h2>
+				<h2>Images</h2>
 				<h3>click for full size</h3>
 				<!-- <textarea cols="16" rows="40" id="image" name="image" /></textarea> -->
 				<input type="file" name="i" />
@@ -66,12 +74,12 @@
 			</div>
 
 			<div id="tbd-column" class="col-md-3">
-				<h2>tbd</h2>
-				<textarea cols="25" rows="25" id="tbd" name="tbd" /></textarea>
+				<h2>To Be Determined</h2>
+				<textarea id="tbd" name="tbd" /></textarea>
 			</div>
 
 			<div id="submitArea" class="col-md-7 col-md-offset-5">
-				<input type="submit" value="Save" style="width:200px;height:80px" name="submitting" />
+				<input type="submit" value="Save" name="submitting" />
 			</div>
 		</form>
 	</div>
