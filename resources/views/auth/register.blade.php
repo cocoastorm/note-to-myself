@@ -5,6 +5,12 @@
     <title>Register</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- include the BotDetect layout stylesheet -->
+  @if (class_exists('CaptchaUrls'))
+    <link href="{{ CaptchaUrls::LayoutStylesheetUrl() }}" type="text/css"
+      rel="stylesheet">
+  @endif
 </head>
 <body>
   <div class="container-fluid">
@@ -56,6 +62,16 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <div class="col-md-6 col-md-offset-4">
+                    <!-- Captcha Image HTML -->
+                    {!! $captchaHtml !!}
+                </div>
+                <div class="col-md-6 col-md-offset-4">
+                    <!-- Captcha Code User Input Textbox -->
+                    <input class="form-control" id="CaptchaCode" type="text" name="CaptchaCode" style="width: 276px; margin-top: 5px">
+                </div>
+            </div>
             <div class="form-group">
               <div class="col-md-6 col-md-offset-4">
                 <button class="btn btn-primary" type="submit">Register</button>
