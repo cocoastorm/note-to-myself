@@ -48,11 +48,17 @@
         },
         {
             "name": "captcha-com/laravel-captcha",
-            "version": "3.0.1",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
-                "url": "http://git.captcha.com/botdetect-laravel-captcha.git",
-                "reference": "862f03abd1bb518c4942b0d1c6eb21c2898c28ed"
+                "url": "https://github.com/captcha-com/laravel-captcha.git",
+                "reference": "5221f800735181b07031ef5fe02c6eac4e1ab815"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/captcha-com/laravel-captcha/zipball/5221f800735181b07031ef5fe02c6eac4e1ab815",
+                "reference": "5221f800735181b07031ef5fe02c6eac4e1ab815",
+                "shasum": ""
             },
             "require": {
                 "captcha-com/captcha": "3.*",
@@ -83,7 +89,7 @@
                 "Laravel Captcha",
                 "captcha"
             ],
-            "time": "2015-04-08 15:42:49"
+            "time": "2015-10-21 07:39:58"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -868,16 +874,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "1.0.8",
+            "version": "1.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "7fe2420f8ad46aa08d5b317c92a148611d366d88"
+                "reference": "7647ac58c35ece044b939e01c85dbaa73ed26351"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/7fe2420f8ad46aa08d5b317c92a148611d366d88",
-                "reference": "7fe2420f8ad46aa08d5b317c92a148611d366d88",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/7647ac58c35ece044b939e01c85dbaa73ed26351",
+                "reference": "7647ac58c35ece044b939e01c85dbaa73ed26351",
                 "shasum": ""
             },
             "require": {
@@ -909,7 +915,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2015-10-18 21:39:26"
+            "time": "2015-10-20 15:22:41"
         },
         {
             "name": "psr/log",
