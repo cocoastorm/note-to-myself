@@ -11,31 +11,23 @@ use App\User;
 use Auth;
 
 class NotesController extends Controller{
-    public function index(){
-    return View::make('welcome',['notes'=>Notes::all()]);
-}
+  public function index(){
+      $user = Auth::user();
+      $notes = Notes::where('userid', $user->id)
+        ->get();
+    return view('notes', ['notes' => $notes]);
+  }
 
-public function logout(){
-    $user = Auth::user();
-      return View::make('logout',['email'=>$user]);
-}
+  public function create(){
+    return view('notes');
+  }
+  public function store(Request $request){
+    $input = $request->all();
+    Notes::create($input);
+    return redirect()->back();
+  }
 
-
-public function create(){
-  return view('welcome');
-}
-public function store(Request $request){
-  $input = $request->all();
-  Notes::create($input);
-  return redirect()->back();
-}
-
-public function edit($id){
-  return view('Notes.edit');
-}
-
-/*public function logout(){
-      return View::make('logout', ['email'=>"Jondeluz@hotmail.com"]);
- }
-*/
+  public function edit($id){
+    return view('Notes.edit');
+  }
 }

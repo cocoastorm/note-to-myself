@@ -10,44 +10,18 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-/*
-Route::get('/all', function () {
-  $notes = \App\Notes::all();
-    return $notes;
-});
-
-Route::get('/insert', function(){
-  DB::insert('insert into notes(id, email, notes, websites, tbd) values(?,?,?,?,?)', [null, "123@123.com", "stuff n things", "google.ca", "tbdddd"]);
-
-});
-
-Route::get('/update', function(){
-  $note = \App\Notes::find(1);
-  $note->email='itzfatalshot@hotmail.com';
-  $note->save();
-  return \App\Notes::find(1);
-});
-*/
-
-Route::get('/welcome', 'NotesController@index');
-
-Route::get('edit', function(){
-  return view('edit');
-});
 
 Route::get('/', function () {
     return view('auth/login');
 });
-
-Route::get('/logout', 'NotesController@logout');
 
 Route::get('home',function(){
   if(Auth::guest()){
     return Redirect::to('auth/login');
   }
   else {
-    return view('notes');
-}
+    return redirect()->action('NotesController@index');
+  }
 });
 
 Route::resource('notes', 'NotesController');

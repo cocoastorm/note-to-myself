@@ -14,6 +14,7 @@ class Notes extends Model{
 
     public $timestamps = true;
     protected $fillable = [
+        'userid',
         'email',
         'notes',
         'websites',
