@@ -42,7 +42,7 @@
 <body>
 	<div id="wrapper" class="container">
 
-		<form action="notes.php" enctype="multipart/form-data" method="post" role="form" class="form-horizontal">
+		<form action="notes" enctype="multipart/form-data" method="post" role="form" class="form-horizontal">
 			<h2 id="header">{{ auth()->user()-> email }} - <span><a href="{{ URL::to('auth/logout') }}">Log out</a></span></h2>
 
 				<div id="notes-column" class="col-md-3">
@@ -90,7 +90,7 @@
 			</div>
 
 			<div id="submitArea" class="col-md-7 col-md-offset-5">
-				<input type="submit" value="Save" name="submitting" />
+				<input type="submit" value="Save" name="submit" id="submit" />
 			</div>
 		</form>
 	</div>
