@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use View;
 use App\Notes;
 use App\User;
-use Auth;
 
 class NotesController extends Controller {
   public function index(){
@@ -31,7 +35,7 @@ class NotesController extends Controller {
 
       // process
       if($validator->fails()) {
-          return Redirect::to('students/create')
+          return Redirect::to('notes/create')
               ->withErrors($validator)
               ->withInput();
       }

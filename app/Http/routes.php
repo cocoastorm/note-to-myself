@@ -20,7 +20,7 @@ Route::get('home',function(){
     return Redirect::to('auth/login');
   }
   else {
-    return redirect()->action('NotesController@index');
+    return Redirect::to('notes');
   }
 });
 

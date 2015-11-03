@@ -43,14 +43,17 @@
 	<div id="wrapper" class="container">
 
 		<form action="notes" enctype="multipart/form-data" method="post" role="form" class="form-horizontal">
+			<?php echo csrf_field(); ?>
 			<h2 id="header">{{ auth()->user()-> email }} - <span><a href="{{ URL::to('auth/logout') }}">Log out</a></span></h2>
 
 				<div id="notes-column" class="col-md-3">
 					<h2>Notes</h2>
 					<textarea id="notes" name="notes" />
-					@foreach($notes as $key => $value)
-						{{ $value->notes }}
-					@endforeach
+					@if(isset($notes))
+						@foreach($notes as $key => $value)
+							{{ $value->notes }}
+						@endforeach
+					@endif
 					</textarea>
 				</div>
 
