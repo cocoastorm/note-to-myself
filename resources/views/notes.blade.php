@@ -42,32 +42,24 @@
 <body>
 	<div id="wrapper" class="container">
 
-		<form action="notes" enctype="multipart/form-data" method="post" role="form" class="form-horizontal">
+		<form action="notes/{{ Auth::user()->id }}" enctype="multipart/form-data" method="post" role="form" class="form-horizontal">
 			<?php echo csrf_field(); ?>
 			<h2 id="header">{{ auth()->user()-> email }} - <span><a href="{{ URL::to('auth/logout') }}">Log out</a></span></h2>
 
 				<div id="notes-column" class="col-md-3">
 					<h2>Notes</h2>
-					<textarea id="notes" name="notes" />
-					@if(isset($notes))
-						@foreach($notes as $key => $value)
-							{{ $value->notes }}
-						@endforeach
-					@endif
-					</textarea>
+					<textarea id="notes" name="notes" />{{ $notes }}</textarea>
 				</div>
 
 				<div id="websites-column" class="col-md-3">
 					<h2>Websites</h2>
 					<h3>click to open</h3>
+
+					@foreach($websites as $website)
+						<input type="text" name="websites[]" value="{{ $website }}" />
+						<br>
+					@endforeach
 					<input type="text" name="websites[]" />
-					<br>
-					<input type="text" name="websites[]" />
-					<br>
-					<input type="text" name="websites[]" />
-					<br>
-					<input type="text" name="websites[]" />
-					<br>
 				</div>
 
 			<div id="images-column" class="col-md-3">
@@ -89,7 +81,7 @@
 
 			<div id="tbd-column" class="col-md-3">
 				<h2>To Be Determined</h2>
-				<textarea id="tbd" name="tbd" /></textarea>
+				<textarea id="tbd" name="tbd" />{{ $tbd }}</textarea>
 			</div>
 
 			<div id="submitArea" class="col-md-7 col-md-offset-5">

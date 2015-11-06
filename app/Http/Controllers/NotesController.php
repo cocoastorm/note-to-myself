@@ -18,44 +18,27 @@ class NotesController extends Controller {
   public function index(){
       $user = Auth::user();
       $notes = Notes::where('userid', $user->id)
-        ->get();
-    return view('notes', ['notes' => $notes]);
+        ->firstOrFail();
+      $websites_array = explode(',', $notes->websites);
+    return view('notes', ['notes' => $notes->notes, 'websites' => $websites_array, 'tbd' => $notes->tbd]);
   }
+  public function update($id) {
+    $note = Notes::find($id);
 
-  public function create(){
-    return view('notes');
-  }
-  public function store(Request $request) {
-      // validate
-      $rules = array(
-        'userid'       => 'required',
-        'email'       => 'required'
-      );
-      $validator = Validator::make(Input::all(), $rules);
-
-      // process
-      if($validator->fails()) {
-          return Redirect::to('notes/create')
-              ->withErrors($validator)
-              ->withInput();
-      }
-      else {
-        $note = new Note;
-        $note->userid = Input::get('userid'); // no idea how to get this from auth->user yet
-        $note->email = Input::get('email'); // wtf is this?
-        $note->notes = Input::get('notes');
-        $note->websites = Input::get('websites');
-        $note->tbd = Input::get('tbd');
-
-        // store back to database
-        $note->save();
-
-        // redirect back
-        return redirect()->back();
+    if($note) {
+      $note->notes = Input::get('notes');
+      $websites_array = Input::get('websites');
+      $note->websites = implode(',', $websites_array);
+      $note->tbd = Input::get('tbd');
+      $note->save();
     }
-  }
-
-  public function edit($id){
-    return view('Notes.edit');
+    else {
+      $note = new Notes;
+      $note->userid = Auth::user()->id;
+      $note->email = Auth::user()->email;
+      $note->notes = Input::get('notes');
+      $note->save();
+    }
+    return redirect()->back();
   }
 }

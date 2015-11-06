@@ -24,7 +24,15 @@ Route::get('home',function(){
   }
 });
 
-Route::resource('notes', 'NotesController');
+Route::get('/notes', [
+    'middleware' => 'auth',
+    'uses' => 'NotesController@index'
+  ]);
+
+Route::post('/notes/{id}', [
+  'middleware' => 'auth',
+  'uses' => 'NotesController@update'
+]);
 
 // Password reset link request routes...
 Route::get('password/email', 'Auth\PasswordController@getEmail');
