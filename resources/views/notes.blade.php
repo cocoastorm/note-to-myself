@@ -48,18 +48,19 @@
 
 				<div id="notes-column" class="col-md-3">
 					<h2>Notes</h2>
-					<textarea id="notes" name="notes" />{{ $notes }}</textarea>
+					<textarea id="notes" name="notes" />{{$user->notes}}</textarea>
 				</div>
 
 				<div id="websites-column" class="col-md-3">
 					<h2>Websites</h2>
 					<h3>click to open</h3>
-
-					@foreach($websites as $website)
+					@forelse($sites as $website)
 						<input type="text" name="websites[]" value="{{ $website }}" />
 						<br>
-					@endforeach
-					<input type="text" name="websites[]" />
+						@empty
+						<input type="text" name="websites[]" />
+					@endforelse
+
 				</div>
 
 			<div id="images-column" class="col-md-3">
@@ -81,7 +82,7 @@
 
 			<div id="tbd-column" class="col-md-3">
 				<h2>To Be Determined</h2>
-				<textarea id="tbd" name="tbd" />{{ $tbd }}</textarea>
+				<textarea id="tbd" name="tbd" />{{$user->tbd}}</textarea>
 			</div>
 
 			<div id="submitArea" class="col-md-7 col-md-offset-5">

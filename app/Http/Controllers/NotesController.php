@@ -17,13 +17,13 @@ use App\User;
 class NotesController extends Controller {
   public function index(){
       $user = Auth::user();
-      $notes = Notes::where('userid', $user->id)
-        ->firstOrFail();
-      $websites_array = explode(',', $notes->websites);
-    return view('notes', ['notes' => $notes->notes, 'websites' => $websites_array, 'tbd' => $notes->tbd]);
+      $websites_array = explode(',', $user->websites);
+    return View::make('notes')->with('user',$user)->with('sites',$websites_array);
   }
+
+
   public function update($id) {
-    $note = Notes::find($id);
+    $note = User::find($id);
 
     if($note) {
       $note->notes = Input::get('notes');
