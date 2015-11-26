@@ -55,7 +55,7 @@
 					<h2>Websites</h2>
 					<h3>click to open</h3>
 					@forelse($sites as $website)
-						<input type="text" name="websites[]" value="{{ $website }}" />
+						<input type="text" name="websites[]" value="{{ $website }}" onClick="openInNew(this)"/>
 						<br>
 						@empty
 						<input type="text" name="websites[]" />
@@ -70,6 +70,11 @@
 				<input type="file" name="i" />
 
 				<div>
+					@foreach($picture as $key => $val)
+						<img src='{{
+						(string) Image::make($val->picture)->encode('data-url')
+						}}'/>
+					@endforeach
 					<a href='uploadedimages/jondeluz@hotmail.com/png.jpg' target='_blank'>
 						<img src='uploadedimages/jondeluz@hotmail.com/thumb_png.jpg' alt='png.jpg' />
 					</a>
@@ -90,6 +95,14 @@
 			</div>
 		</form>
 	</div>
+
+	<script>
+		function openInNew(url) {
+			var win = window.open(url.getAttribute('value'), '_blank');
+			win.focus();
+		}
+	</script>
+
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
