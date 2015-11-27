@@ -18,6 +18,8 @@ use App\Notes;
 use App\User;
 use App\Picture;
 
+use Session;
+
 class NotesController extends Controller {
   public function index(){
       $user = Auth::user();
@@ -43,6 +45,13 @@ class NotesController extends Controller {
 
   public function update($id, Request $request) {
     $note = User::find($id);
+    $image_count = Picture::where('user_id', $id)->count();
+
+    if (isset($_POST['delete'])) {
+      $pic_id = Input::get('image_id');
+      $pic = Picture::where('user_id', $id)->where('id', $pic_id)->first();
+      //$pic->delete();
+    }
 
     if($note) {
       $note->notes = Input::get('notes');
@@ -50,19 +59,20 @@ class NotesController extends Controller {
       $note->websites = implode(',', $websites_array);
       $note->tbd = Input::get('tbd');
       $note->save();
-
       if($request->hasFile('i')) {
-        $image = Input::file('i');
-
-        $realImage = Image::make($image);
-
-        $realImage->encode('jpg', 75);
-
-        $picture = new Picture;
-        $picture->user_id = $note->id;
-        $picture->picture = $realImage;
-        $picture->save();
+        if($image_count < 4){
+          $image = Input::file('i');
+          $realImage = Image::make($image);
+          $realImage->encode('jpg', 75);
+          $picture = new Picture;
+          $picture->user_id = $note->id;
+          $picture->picture = $realImage;
+          $picture->save();
+        } else {
+            Session::flash('error', "Maximum 4 Images!");
+        }
       }
+
     }
     else {
       $note = new Notes;
