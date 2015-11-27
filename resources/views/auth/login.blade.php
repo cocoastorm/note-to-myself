@@ -42,6 +42,12 @@
           </div>
 
           <div class="form-group">
+              <div class="col-md-6 col-md-offset-4">
+                  <input type="checkbox" name="remember" id="remember"> Remember Me
+              </div>
+          </div>
+
+          <div class="form-group">
             <div class="col-md-6 col-md-offset-4">
               <button class="btn btn-primary" type="submit">Login</button>
             </div>
