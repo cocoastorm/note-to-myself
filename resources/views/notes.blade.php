@@ -46,6 +46,10 @@
 			<?php echo csrf_field(); ?>
 			<h2 id="header">{{ auth()->user()-> email }} - <span><a href="{{ URL::to('auth/logout') }}">Log out</a></span></h2>
 
+			@if (Session::has('error'))
+	        <div class="alert alert-danger">{{ Session::get('error') }}</div>
+	    @endif
+
 				<div id="notes-column" class="col-md-3">
 					<h2>Notes</h2>
 					<textarea id="notes" name="notes" />{{$user->notes}}</textarea>
@@ -70,16 +74,15 @@
 				<input type="file" name="i" />
 
 				<div>
+					<!-- 125px by 70px -->
 					@foreach($picture as $key => $val)
+					<input type="hidden" name="image_id" value="{{$val->id}}">
 						<img src='{{
-						(string) Image::make($val->picture)->encode('data-url')
+						(string) Image::make($val->picture)->resize(125,70)->encode('data-url')
 						}}'/>
+						<input type='checkbox' name='delete'/>
+						<label for='delete'>delete</label>
 					@endforeach
-					<a href='uploadedimages/jondeluz@hotmail.com/png.jpg' target='_blank'>
-						<img src='uploadedimages/jondeluz@hotmail.com/thumb_png.jpg' alt='png.jpg' />
-					</a>
-					<input type='checkbox' name='delete[]' value='20' />
-					<label for='delete[]'>delete</label>
 					<br />
 					<br />
 				</div>
