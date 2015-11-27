@@ -43,7 +43,7 @@
 
           <div class="form-group">
               <div class="col-md-6 col-md-offset-4">
-                  <input type="checkbox" name="remember" id="remember"> Remember Me
+                  <input type="checkbox" name="remember" id="remember" value="true"> Remember Me
               </div>
           </div>
 

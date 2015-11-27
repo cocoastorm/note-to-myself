@@ -132,4 +132,12 @@ class AuthController extends Controller
 
     return redirect($this->redirectPath());
   }
+
+  public function authenticated(Request $request, $user) {
+      if($request->remember == 'yes') {
+          $remembercookie = cookie()->forever('remember', $user->email);
+          Cookie:queue($remembercookie);
+      }
+      return redirect()->intended($this->redirectPath());
+  }
 }
