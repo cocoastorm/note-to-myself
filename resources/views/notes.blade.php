@@ -76,11 +76,11 @@
 				<div>
 					<!-- 125px by 70px -->
 					@foreach($picture as $key => $val)
-					<input type="hidden" name="image_id" value="{{$val->id}}">
-						<img src='{{
-						(string) Image::make($val->picture)->resize(125,70)->encode('data-url')
-						}}'/>
-						<input type='checkbox' name='delete'/>
+						<input type="hidden" name="image_id" value="{{$val->id}}">
+						<a href='{{(string) Image::make($val->picture)->encode('data-url')}}'>
+							<img src='{{(string) Image::make($val->picture)->resize(125,70)->encode('data-url')}}'/>
+						</a>
+						<input type='checkbox' name="delete[]" value="{{$val->id}}"/>
 						<label for='delete'>delete</label>
 					@endforeach
 					<br />

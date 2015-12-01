@@ -1,4 +1,5 @@
 <?php
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,17 @@
 
 Route::get('/', function () {
     return view('auth/login');
+});
+
+Route::get('activate/{code}', function($code){
+		$user = User::whereActive($code)->first();
+    if(is_null($user))
+      return "Invalid Activation code!";
+      else {
+        $user->active = "active";
+        $user->save();
+      }
+  	return "Account has been activated!";
 });
 
 Route::get('home',function(){

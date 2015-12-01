@@ -26,16 +26,6 @@ class NotesController extends Controller {
       $websites_array = explode(',', $user->websites);
       $picture = Picture::where('user_id', $user->id)->get();
 
-//      $pictures = array();
-//
-//      foreach($picture as $key=>$value) {
-//        dd($value->picture);
-//        $imagedata = Image::make($value->picture)->encode('data-url');
-//        array_push($pictures, $imagedata);
-//      }
-//
-//      dd($pictures);
-
       return View::make('notes')
           ->with('user',$user)
           ->with('sites',$websites_array)
@@ -47,10 +37,13 @@ class NotesController extends Controller {
     $note = User::find($id);
     $image_count = Picture::where('user_id', $id)->count();
 
-    if (isset($_POST['delete'])) {
-      $pic_id = Input::get('image_id');
-      $pic = Picture::where('user_id', $id)->where('id', $pic_id)->first();
-      //$pic->delete();
+    $check = Input::get('delete');
+    if(!is_null($check)){
+      for($i = 0; $i < count($check); $i++){
+        $image_id = $check[$i];
+        $image = Picture::where('user_id',$id)->where('id', $image_id);
+        $image->delete();
+      }
     }
 
     if($note) {
