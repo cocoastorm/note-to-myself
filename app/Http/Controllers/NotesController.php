@@ -52,9 +52,18 @@ class NotesController extends Controller {
       $note->websites = implode(',', $websites_array);
       $note->tbd = Input::get('tbd');
       $note->save();
+
       if($request->hasFile('i')) {
+        $image = Input::file('i');
+        $rules_input = ['i' => $image];
+        $rules = ['i' => 'mimes:jpg,gif,jpeg'];
+        $validator = Validator::make($rules_input, $rules);
+        if ($validator->fails()) {
+          Session::flash('error', "Not a JPG or GIF!!");
+          return redirect()->back();
+        }
+
         if($image_count < 4){
-          $image = Input::file('i');
           $realImage = Image::make($image);
           $realImage->encode('jpg', 75);
           $picture = new Picture;
