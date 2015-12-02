@@ -5,6 +5,7 @@
     <title>Register</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
   <div class="container-fluid">
@@ -55,7 +56,7 @@
                   <input class="form-control" type="password" name="password_confirmation">
                 </div>
             </div>
-
+            <div class="g-recaptcha col-md-6 col-md-offset-4" data-sitekey="6LfM2xETAAAAADqCx5fEKk6D7AFOcZXk9f_eU-w9"></div>
             <div class="form-group">
               <div class="col-md-6 col-md-offset-4">
                 <button class="btn btn-primary" type="submit">Register</button>

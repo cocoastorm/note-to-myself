@@ -66,6 +66,41 @@ class AuthController extends Controller
     }
 
     /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postRegister(Request $request)
+    {
+        $secret = '6LfM2xETAAAAABaid8-qOvJpiR-dQtNsiIi61fTj';
+        $gRecaptchaResponse = $request->input('g-recaptcha-response');
+        $remoteIp = $request->ip;
+        $recaptcha = new \ReCaptcha\ReCaptcha($secret);
+
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        $resp = $recaptcha->verify($gRecaptchaResponse, $remoteIp);
+        if(!($resp->isSuccess())) {
+            $errors = $resp->getErrorCodes();
+            return redirect()
+                ->back()
+                ->withInput($request->only('name', 'email'))
+                ->withErrors([$errors => 'Invalid Captcha!']);
+        }
+
+        Auth::login($this->create($request->all()));
+
+        return redirect($this->redirectPath());
+    }
+
+    /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
