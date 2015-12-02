@@ -12,7 +12,13 @@ class CreateWebsitesTable extends Migration
      */
     public function up()
     {
-        //
+      Schema::create('websites', function (Blueprint $table) {
+          $table->increments('id');
+          $table->integer('user_id');
+          $table->integer('site_id');
+          $table->string('websites', 100)->nullable();
+          $table->timestamps();
+      });
     }
 
     /**
@@ -22,6 +28,6 @@ class CreateWebsitesTable extends Migration
      */
     public function down()
     {
-        //
+      Schema::drop('websites');
     }
 }
