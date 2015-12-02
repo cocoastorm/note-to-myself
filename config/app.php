@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => 'http://jknotes.azurewebsites.net/',
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', 'SomeRandomString'),
+    'key' => env('APP_KEY', 'd5Zp1ASu7kl2uvkSBQmJjGXTEdS2h1VJ'),
 
     'cipher' => 'AES-256-CBC',
 
