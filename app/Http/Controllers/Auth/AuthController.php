@@ -43,6 +43,19 @@ class AuthController extends Controller
     }
 
     /**
+     * Override credentials to check if user is active before logging in!
+     *
+     * @param Request $request
+     * @return array
+     */
+    protected function getCredentials(Request $request)
+    {
+        $credentials = $request->only($this->loginUsername(), 'password');
+
+        return array_add($credentials, 'active', 'active');
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
