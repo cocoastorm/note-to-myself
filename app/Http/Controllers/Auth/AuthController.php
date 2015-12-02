@@ -109,14 +109,17 @@ class AuthController extends Controller
     protected function create(array $data)
     {
       $active = str_random(30);
-      Mail::send('welcome', ['name'=>$data['name'], 'code'=>$active], function($message){
-        $message->to('jondeluz@hotmail.com', 'Some guy')->subject('Welcome fam');
+
+      $user = User::create([
+          'name' => $data['name'],
+          'email' => $data['email'],
+          'active' => $active,
+          'password' => bcrypt($data['password']),
+      ]);
+
+      Mail::send('welcome', ['name'=>$data['name'], 'code'=>$active], function($message) use ($user) {
+        $message->to($user->email, $user->name)->subject('Welcome to NTM! Please confirm registration!');
       });
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'active' => $active,
-            'password' => bcrypt($data['password']),
-        ]);
+      return $user;
     }
 }
