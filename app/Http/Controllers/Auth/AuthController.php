@@ -112,7 +112,6 @@ class AuthController extends Controller
     protected function create(array $data)
     {
       $active = str_random(30);
-
       $user = User::create([
           'name' => $data['name'],
           'email' => $data['email'],
