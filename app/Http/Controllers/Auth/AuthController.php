@@ -30,6 +30,8 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    protected $maxLoginAttempts = 3;
+
     /**
      * Create a new authentication controller instance.
      *
