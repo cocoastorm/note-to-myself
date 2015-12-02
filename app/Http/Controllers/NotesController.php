@@ -17,13 +17,14 @@ use App\Http\Controllers\Controller;
 use App\Notes;
 use App\User;
 use App\Picture;
+use App\Website;
 
 use Session;
 
 class NotesController extends Controller {
   public function index(){
       $user = Auth::user();
-      $websites_array = explode(',', $user->websites);
+      $websites_array = Website::where('user_id', $user->id)->get();
       $picture = Picture::where('user_id', $user->id)->get();
 
       return View::make('notes')
@@ -46,10 +47,44 @@ class NotesController extends Controller {
       }
     }
 
+    $website = Input::get('websites');
+    $user_sites = Website::where('user_id', $id);
+    $site_count = count($website);
+
+    if(!is_null($website)){
+      $pos = 0;
+      $delete_count = 0;
+      for($i = 0; $i < $site_count; $i++){
+          $site = new Website;
+          $site->user_id = Auth::user()->id;
+          $old_site = Website::where('user_id', $id)->where('site_id',$pos)->first();
+          if(!is_null($old_site)){  //check for existing sites
+            if(empty($website[$i])) {   //if old values have been removed delete them fam
+                Website::where('user_id',$id)->where('site_id',$pos)->first()->delete();
+                $delete_count++;
+            }
+            else if(!is_null($website[$i]) && !empty($website[$i])){  //update old values
+              $old_site->site_id = $pos - $delete_count;
+              $old_site->websites = $website[$i];
+              $old_site->save();
+            }
+          }else {   //check if there is no existing site
+            if(!is_null($website[$i]) && !empty($website[$i])){
+              $site->site_id = $pos;
+              $site->websites = $website[$i];
+              $site->save();
+            } else {
+              $pos--;
+            }
+          }
+          $pos++;
+      }
+    }
+
+
     if($note) {
       $note->notes = Input::get('notes');
-      $websites_array = Input::get('websites');
-      $note->websites = implode(',', $websites_array);
+      //$websites_array = Input::get('websites');
       $note->tbd = Input::get('tbd');
       $note->save();
       if($request->hasFile('i')) {

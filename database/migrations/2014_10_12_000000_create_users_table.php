@@ -19,7 +19,6 @@ class CreateUsersTable extends Migration
           $table->string('password', 60);
           $table->string('active', 30);
           $table->string('notes', 255)->nullable();
-          $table->string('websites', 100)->nullable();
           $table->string('tbd', 255)->nullable();
           $table->rememberToken();
           $table->timestamps();

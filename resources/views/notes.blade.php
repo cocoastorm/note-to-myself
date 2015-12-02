@@ -58,13 +58,14 @@
 				<div id="websites-column" class="col-md-3">
 					<h2>Websites</h2>
 					<h3>click to open</h3>
-					@forelse($sites as $website)
-						<input type="text" name="websites[]" value="{{ $website }}" onClick="openInNew(this)"/>
+					@foreach($sites as $ws => $website)
+						<input type="text" name="websites[]" value="{{ $website->websites }}" onClick="openInNew(this)"/>
 						<br>
-						@empty
-						<input type="text" name="websites[]" />
-					@endforelse
-
+					@endforeach
+						<input type="text" name="websites[]" onClick="openInNew(this)"/>
+						<input type="text" name="websites[]" onClick="openInNew(this)"/>
+						<input type="text" name="websites[]" onClick="openInNew(this)"/>
+						<input type="text" name="websites[]" onClick="openInNew(this)"/>
 				</div>
 
 			<div id="images-column" class="col-md-3">
