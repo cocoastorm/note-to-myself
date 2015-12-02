@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Validator;
 use Mail;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -60,8 +64,7 @@ class AuthController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-            'g-captcha-response' => 'required'
+            'password' => 'required|confirmed|min:6'
         ]);
     }
 
@@ -71,7 +74,7 @@ class AuthController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function postRegister(Request $request)
+    protected function postRegister(Request $request)
     {
         $secret = '6LfM2xETAAAAABaid8-qOvJpiR-dQtNsiIi61fTj';
         $gRecaptchaResponse = $request->input('g-recaptcha-response');
@@ -92,7 +95,7 @@ class AuthController extends Controller
             return redirect()
                 ->back()
                 ->withInput($request->only('name', 'email'))
-                ->withErrors([$errors => 'Invalid Captcha!']);
+                ->withErrors(['Error' => 'Invalid Captcha!']);
         }
 
         Auth::login($this->create($request->all()));
