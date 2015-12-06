@@ -1,0 +1,1 @@
+{"virtualbox":{"/home/vagrant/note-to-myself":{"type":null,"mount_options":[],"guestpath":"/home/vagrant/note-to-myself","hostpath":"C:/Users/khoat/Laravel/note-to-myself","disabled":false},"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/Users/khoat/Laravel/note-to-myself","disabled":false}}}
