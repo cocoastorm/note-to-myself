@@ -12,7 +12,7 @@ class Changeblob extends Migration
      */
     public function up()
     {
-        DB::statement("ALTER TABLE picture ALTER COLUMN picture TYPE MEDIUMBLOB");
+        DB::statement("ALTER TABLE picture ALTER COLUMN picture TYPE bytea");
     }
 
     /**
@@ -22,6 +22,6 @@ class Changeblob extends Migration
      */
     public function down()
     {
-        DB::statement("ALTER TABLE picture ALTER COLUMN picture TYPE BLOB");
+        DB::statement("ALTER TABLE picture ALTER COLUMN picture TYPE bytea");
     }
 }
