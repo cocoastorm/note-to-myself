@@ -4,6 +4,8 @@ Khoa Nguyen	A00926551
 Jon Deluz	A00849398
 URL: notetomyself.herokuapp.com
 
+NOTE: Database on Heroku is too small so image uploading fails! 
+
 Step    Score   Implementation
 1       5       When signing up no duplicate usernames are allowed, the username must
                 be an email address. And the passwords are hashed when stored in the database.
