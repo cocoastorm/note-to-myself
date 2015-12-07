@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://jknotes.azurewebsites.net/',
+    'url' => 'http://notetomyself.herokuapp.com',
 
     /*
     |--------------------------------------------------------------------------
